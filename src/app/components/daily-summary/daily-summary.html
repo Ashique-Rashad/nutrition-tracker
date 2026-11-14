@@ -1,0 +1,17 @@
+<section class="summary surface" aria-label="Daily totals" aria-live="polite">
+  <div class="summary__stat">
+    <span class="summary__label">Calories</span>
+    <span class="summary__value">{{ dayTotals().calories | number: '1.0-0' }}</span>
+    <span class="summary__unit">kcal</span>
+  </div>
+  <div class="summary__stat">
+    <span class="summary__label">Protein</span>
+    <span class="summary__value">{{ dayTotals().protein | number: '1.0-1' }}</span>
+    <span class="summary__unit">g</span>
+  </div>
+  <div class="summary__stat">
+    <span class="summary__label">Carbs</span>
+    <span class="summary__value">{{ dayTotals().carbs | number: '1.0-1' }}</span>
+    <span class="summary__unit">g</span>
+  </div>
+</section>

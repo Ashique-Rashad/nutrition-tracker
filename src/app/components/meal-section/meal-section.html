@@ -1,0 +1,42 @@
+<section class="meal surface" [attr.aria-label]="mealLabel()">
+  <h2 class="meal__title" id="meal-title-{{ meal() }}">{{ mealLabel() }}</h2>
+
+  @if (entries().length === 0) {
+    <p class="meal__empty">Nothing logged yet</p>
+  } @else {
+    <ul class="meal__list">
+      @for (resolved of entries(); track resolved.entry.id) {
+        <li class="meal__entry">
+          <div class="meal__food">
+            <span class="meal__name">{{ resolved.food.name }}</span>
+            <span class="meal__servings"
+              >{{ resolved.entry.servings | number: '1.0-2' }}
+              {{ resolved.entry.servings === 1 ? 'serving' : 'servings' }}</span
+            >
+          </div>
+          <div class="meal__nutrition">
+            <span class="meal__value"
+              >{{ resolved.nutrition.calories | number: '1.0-0' }} kcal</span
+            >
+            <span class="meal__value">{{ resolved.nutrition.protein | number: '1.0-1' }} g</span>
+            <span class="meal__value">{{ resolved.nutrition.carbs | number: '1.0-1' }} g</span>
+            <button
+              type="button"
+              class="btn btn--danger meal__remove"
+              (click)="removeEntry(resolved.entry.id)"
+              [attr.aria-label]="'Remove ' + resolved.food.name + ' from ' + mealLabel()"
+            >
+              Remove
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+    <div class="meal__subtotal">
+      <span class="meal__subtotal-label">Subtotal</span>
+      <span class="meal__subtotal-value">{{ mealTotal().calories | number: '1.0-0' }} kcal</span>
+      <span class="meal__subtotal-value">{{ mealTotal().protein | number: '1.0-1' }} g</span>
+      <span class="meal__subtotal-value">{{ mealTotal().carbs | number: '1.0-1' }} g</span>
+    </div>
+  }
+</section>

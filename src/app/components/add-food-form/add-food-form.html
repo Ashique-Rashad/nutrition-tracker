@@ -1,0 +1,117 @@
+<section class="add-form surface" aria-label="Add a new food">
+  <h2 class="add-form__title">Add a food</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="add-form__field">
+      <label class="add-form__label" for="add-name">Name</label>
+      <input
+        #nameInput
+        id="add-name"
+        type="text"
+        class="add-form__input"
+        formControlName="name"
+        [class.add-form__input--invalid]="showError(form.controls.name)"
+        [attr.aria-invalid]="showError(form.controls.name) ? 'true' : null"
+        [attr.aria-describedby]="showError(form.controls.name) ? 'add-name-error' : null"
+      />
+      @if (showError(form.controls.name)) {
+        <p class="add-form__error" id="add-name-error" role="alert">{{ nameError() }}</p>
+      }
+    </div>
+
+    <div class="add-form__field">
+      <label class="add-form__label" for="add-serving-size">Serving size</label>
+      <input
+        id="add-serving-size"
+        type="number"
+        class="add-form__input"
+        formControlName="servingSize"
+        min="0.01"
+        step="0.01"
+        [class.add-form__input--invalid]="showError(form.controls.servingSize)"
+        [attr.aria-invalid]="showError(form.controls.servingSize) ? 'true' : null"
+        [attr.aria-describedby]="
+          showError(form.controls.servingSize) ? 'add-serving-size-error' : null
+        "
+      />
+      @if (showError(form.controls.servingSize)) {
+        <p class="add-form__error" id="add-serving-size-error" role="alert">
+          {{ numberError('Serving size', 0.01, form.controls.servingSize) }}
+        </p>
+      }
+    </div>
+
+    <div class="add-form__field">
+      <label class="add-form__label" for="add-serving-unit">Serving unit</label>
+      <select id="add-serving-unit" class="add-form__input" formControlName="servingUnit">
+        @for (unit of servingUnits; track unit) {
+          <option [value]="unit">{{ unit }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="add-form__field">
+      <label class="add-form__label" for="add-calories">Calories (kcal)</label>
+      <input
+        id="add-calories"
+        type="number"
+        class="add-form__input"
+        formControlName="calories"
+        min="0"
+        step="0.1"
+        [class.add-form__input--invalid]="showError(form.controls.calories)"
+        [attr.aria-invalid]="showError(form.controls.calories) ? 'true' : null"
+        [attr.aria-describedby]="showError(form.controls.calories) ? 'add-calories-error' : null"
+      />
+      @if (showError(form.controls.calories)) {
+        <p class="add-form__error" id="add-calories-error" role="alert">
+          {{ numberError('Calories', 0, form.controls.calories) }}
+        </p>
+      }
+    </div>
+
+    <div class="add-form__field">
+      <label class="add-form__label" for="add-protein">Protein (g)</label>
+      <input
+        id="add-protein"
+        type="number"
+        class="add-form__input"
+        formControlName="protein"
+        min="0"
+        step="0.1"
+        [class.add-form__input--invalid]="showError(form.controls.protein)"
+        [attr.aria-invalid]="showError(form.controls.protein) ? 'true' : null"
+        [attr.aria-describedby]="showError(form.controls.protein) ? 'add-protein-error' : null"
+      />
+      @if (showError(form.controls.protein)) {
+        <p class="add-form__error" id="add-protein-error" role="alert">
+          {{ numberError('Protein', 0, form.controls.protein) }}
+        </p>
+      }
+    </div>
+
+    <div class="add-form__field">
+      <label class="add-form__label" for="add-carbs">Carbohydrates (g)</label>
+      <input
+        id="add-carbs"
+        type="number"
+        class="add-form__input"
+        formControlName="carbs"
+        min="0"
+        step="0.1"
+        [class.add-form__input--invalid]="showError(form.controls.carbs)"
+        [attr.aria-invalid]="showError(form.controls.carbs) ? 'true' : null"
+        [attr.aria-describedby]="showError(form.controls.carbs) ? 'add-carbs-error' : null"
+      />
+      @if (showError(form.controls.carbs)) {
+        <p class="add-form__error" id="add-carbs-error" role="alert">
+          {{ numberError('Carbohydrates', 0, form.controls.carbs) }}
+        </p>
+      }
+    </div>
+
+    <div class="add-form__actions">
+      <button type="submit" class="btn btn--primary">Save food</button>
+      <button type="button" class="btn" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</section>

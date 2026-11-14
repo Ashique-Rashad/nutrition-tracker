@@ -1,0 +1,59 @@
+<section class="browser surface" aria-label="Food browser">
+  <div class="browser__search">
+    <label class="browser__search-label" for="food-search">Search foods</label>
+    <div class="browser__search-row">
+      <input
+        id="food-search"
+        type="search"
+        class="browser__search-input"
+        placeholder="Search foods…"
+        [value]="searchTerm()"
+        (input)="onSearchInput($event)"
+      />
+      <button
+        #addButton
+        type="button"
+        class="btn btn--primary browser__add"
+        (click)="requestAddFood()"
+      >
+        Add food
+      </button>
+    </div>
+  </div>
+
+  @if (filteredFoods().length === 0) {
+    <div class="browser__empty">
+      <p class="browser__empty-text">No foods match your search</p>
+      <button type="button" class="btn btn--primary" (click)="requestAddFood()">Add food</button>
+    </div>
+  } @else {
+    <ul class="browser__list">
+      @for (food of filteredFoods(); track food.id) {
+        <li>
+          <button
+            type="button"
+            class="browser__item"
+            [class.browser__item--selected]="food.id === selectedId()"
+            [attr.aria-current]="food.id === selectedId() ? 'true' : null"
+            (click)="selectFood(food.id)"
+          >
+            <span class="browser__item-name">
+              {{ food.name }}
+              @if (food.isCustom) {
+                <span class="browser__badge">Custom</span>
+              }
+            </span>
+            <span class="browser__item-serving">{{ food.servingSize }} {{ food.servingUnit }}</span>
+            <span class="browser__item-value"
+              >{{ food.nutrition.calories | number: '1.0-0' }} kcal</span
+            >
+            <span class="browser__item-value"
+              >{{ food.nutrition.protein | number: '1.0-1' }} g</span
+            >
+            <span class="browser__item-value">{{ food.nutrition.carbs | number: '1.0-1' }} g</span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>

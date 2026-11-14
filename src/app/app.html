@@ -1,0 +1,34 @@
+<div class="app-shell">
+  <header class="app-header">
+    <h1 class="app-title">Nutrition Tracker</h1>
+    <app-daily-summary class="app-summary" />
+  </header>
+  <main class="app-main">
+    <div class="app-columns">
+      <div class="app-column app-column--browser">
+        @if (showAddForm()) {
+          <app-add-food-form
+            class="app-add-form"
+            [initialName]="addFormPrefill()"
+            (saved)="onFoodSaved($event)"
+            (cancelled)="onFormCancelled()"
+          />
+        }
+        <app-food-browser
+          [selectedId]="selectedFoodId()"
+          (foodSelected)="onFoodSelected($event)"
+          (addFoodRequested)="onAddFoodRequested($event)"
+        />
+      </div>
+      <div class="app-column app-column--diary">
+        <app-food-detail [food]="selectedFood()" />
+        <h2 class="app-section-heading">Today's meals</h2>
+        <div class="app-meals">
+          @for (meal of meals; track meal) {
+            <app-meal-section [meal]="meal" />
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

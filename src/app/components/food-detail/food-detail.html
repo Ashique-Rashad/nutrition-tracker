@@ -1,0 +1,70 @@
+<section class="detail surface" aria-label="Selected food">
+  @if (food(); as selectedFood) {
+    <h2 class="detail__title">{{ selectedFood.name }}</h2>
+    <p class="detail__serving">
+      Serving: {{ selectedFood.servingSize }} {{ selectedFood.servingUnit }}
+    </p>
+
+    <div class="detail__stats" aria-label="Nutrition per serving">
+      <span class="detail__stat">
+        <span class="detail__stat-label">Calories</span>
+        <span class="detail__stat-value"
+          >{{ selectedFood.nutrition.calories | number: '1.0-0' }} kcal</span
+        >
+      </span>
+      <span class="detail__stat">
+        <span class="detail__stat-label">Protein</span>
+        <span class="detail__stat-value"
+          >{{ selectedFood.nutrition.protein | number: '1.0-1' }} g</span
+        >
+      </span>
+      <span class="detail__stat">
+        <span class="detail__stat-label">Carbs</span>
+        <span class="detail__stat-value"
+          >{{ selectedFood.nutrition.carbs | number: '1.0-1' }} g</span
+        >
+      </span>
+    </div>
+
+    <div class="detail__form">
+      <div class="detail__field">
+        <label class="detail__label" for="servings-input">Servings</label>
+        <input
+          id="servings-input"
+          type="number"
+          class="detail__input"
+          min="0.1"
+          step="0.1"
+          [value]="servingsInput()"
+          (input)="onServingsInput($event)"
+        />
+      </div>
+      <div class="detail__field">
+        <label class="detail__label" for="meal-select">Meal</label>
+        <select id="meal-select" class="detail__input" (change)="onMealChange($event)">
+          @for (option of meals; track option) {
+            <option [value]="option" [selected]="option === meal()">{{ mealLabel(option) }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="detail__preview" aria-live="polite">
+      <span class="detail__preview-label">Preview</span>
+      <span class="detail__preview-value">{{ preview().calories | number: '1.0-0' }} kcal</span>
+      <span class="detail__preview-value">{{ preview().protein | number: '1.0-1' }} g protein</span>
+      <span class="detail__preview-value">{{ preview().carbs | number: '1.0-1' }} g carbs</span>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn--primary detail__add"
+      [disabled]="!canAdd()"
+      (click)="addToMeal()"
+    >
+      Add to meal
+    </button>
+  } @else {
+    <p class="detail__placeholder">Select a food to see its details</p>
+  }
+</section>
