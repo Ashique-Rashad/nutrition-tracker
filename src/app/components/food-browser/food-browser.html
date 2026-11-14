@@ -44,13 +44,15 @@
               }
             </span>
             <span class="browser__item-serving">{{ food.servingSize }} {{ food.servingUnit }}</span>
-            <span class="browser__item-value"
+            <span class="browser__item-value browser__item-value--calories"
               >{{ food.nutrition.calories | number: '1.0-0' }} kcal</span
             >
-            <span class="browser__item-value"
+            <span class="browser__item-value browser__item-value--protein"
               >{{ food.nutrition.protein | number: '1.0-1' }} g</span
             >
-            <span class="browser__item-value">{{ food.nutrition.carbs | number: '1.0-1' }} g</span>
+            <span class="browser__item-value browser__item-value--carbs"
+              >{{ food.nutrition.carbs | number: '1.0-1' }} g</span
+            >
           </button>
         </li>
       }

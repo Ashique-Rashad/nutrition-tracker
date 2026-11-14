@@ -6,19 +6,19 @@
     </p>
 
     <div class="detail__stats" aria-label="Nutrition per serving">
-      <span class="detail__stat">
+      <span class="detail__stat detail__stat--calories">
         <span class="detail__stat-label">Calories</span>
         <span class="detail__stat-value"
           >{{ selectedFood.nutrition.calories | number: '1.0-0' }} kcal</span
         >
       </span>
-      <span class="detail__stat">
+      <span class="detail__stat detail__stat--protein">
         <span class="detail__stat-label">Protein</span>
         <span class="detail__stat-value"
           >{{ selectedFood.nutrition.protein | number: '1.0-1' }} g</span
         >
       </span>
-      <span class="detail__stat">
+      <span class="detail__stat detail__stat--carbs">
         <span class="detail__stat-label">Carbs</span>
         <span class="detail__stat-value"
           >{{ selectedFood.nutrition.carbs | number: '1.0-1' }} g</span
@@ -65,6 +65,8 @@
       Add to meal
     </button>
   } @else {
-    <p class="detail__placeholder">Select a food to see its details</p>
+    <div class="detail__placeholder">
+      <p>Select a food to see its details</p>
+    </div>
   }
 </section>

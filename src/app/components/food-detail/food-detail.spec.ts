@@ -13,6 +13,15 @@ const BANANA: FoodItem = {
   isCustom: false,
 };
 
+const OATS: FoodItem = {
+  id: 'oats',
+  name: 'Oats (dry)',
+  servingSize: 40,
+  servingUnit: 'g',
+  nutrition: { calories: 150, protein: 5.0, carbs: 27.0 },
+  isCustom: false,
+};
+
 describe('FoodDetail', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -56,6 +65,22 @@ describe('FoodDetail', () => {
     const { el } = setup(BANANA);
     const input = el.querySelector('#servings-input') as HTMLInputElement;
     const select = el.querySelector('#meal-select') as HTMLSelectElement;
+    expect(input.value).toBe('1');
+    expect(select.value).toBe('breakfast');
+  });
+
+  it('resets servings and meal when a different food is selected', () => {
+    const { fixture, el } = setup(BANANA);
+    setServings(fixture, el, '2');
+    const select = el.querySelector('#meal-select') as HTMLSelectElement;
+    select.value = 'dinner';
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    fixture.componentRef.setInput('food', OATS);
+    fixture.detectChanges();
+
+    const input = el.querySelector('#servings-input') as HTMLInputElement;
     expect(input.value).toBe('1');
     expect(select.value).toBe('breakfast');
   });

@@ -4,13 +4,16 @@
 
 .meal__title {
   font-size: var(--font-size-lg);
+  font-weight: 700;
   margin-bottom: var(--space-3);
 }
 
 .meal__empty {
   color: var(--color-text-muted);
-  font-style: italic;
-  padding: var(--space-2) 0;
+  padding: var(--space-4);
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  text-align: center;
 }
 
 .meal__list {
@@ -39,7 +42,7 @@
 }
 
 .meal__name {
-  font-weight: 600;
+  font-weight: 650;
   overflow-wrap: anywhere;
 }
 
@@ -57,10 +60,22 @@
 
 .meal__value {
   font-size: var(--font-size-sm);
-  color: var(--color-text);
+  font-weight: 600;
   white-space: nowrap;
   min-width: 3.5em;
   text-align: right;
+}
+
+.meal__value--calories {
+  color: var(--macro-calories);
+}
+
+.meal__value--protein {
+  color: var(--macro-protein);
+}
+
+.meal__value--carbs {
+  color: var(--macro-carbs);
 }
 
 .meal__remove {
@@ -81,6 +96,7 @@
 
 .meal__subtotal-label {
   margin-right: auto;
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
@@ -88,6 +104,18 @@
   white-space: nowrap;
   min-width: 3.5em;
   text-align: right;
+}
+
+.meal__subtotal-value--calories {
+  color: var(--macro-calories);
+}
+
+.meal__subtotal-value--protein {
+  color: var(--macro-protein);
+}
+
+.meal__subtotal-value--carbs {
+  color: var(--macro-carbs);
 }
 
 @media (max-width: 480px) {

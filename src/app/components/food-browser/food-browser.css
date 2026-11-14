@@ -8,7 +8,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-surface-alt);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -24,9 +25,6 @@
 .browser__search-input {
   flex: 1;
   min-width: 0;
-  padding: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
 }
 
 .browser__add {
@@ -44,11 +42,12 @@
   gap: var(--space-2);
   align-items: center;
   width: 100%;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--space-4);
   border: none;
   border-bottom: 1px solid var(--color-border);
   background-color: transparent;
   text-align: left;
+  transition: background-color 0.15s ease;
 }
 
 .browser__item:last-child {
@@ -59,13 +58,18 @@
   background-color: var(--color-surface-alt);
 }
 
+/* Selected: soft accent wash + accent bar at the leading edge */
 .browser__item--selected {
   background-color: var(--color-primary-soft);
   box-shadow: inset 3px 0 0 var(--color-primary);
 }
 
+.browser__item:focus-visible {
+  outline-offset: -2px;
+}
+
 .browser__item-name {
-  font-weight: 600;
+  font-weight: 650;
   overflow-wrap: anywhere;
 }
 
@@ -73,12 +77,11 @@
   display: inline-block;
   margin-left: var(--space-1);
   padding: 0 var(--space-2);
-  border: 1px solid var(--color-primary);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background-color: var(--color-primary-soft);
   color: var(--color-primary);
   font-size: 0.6875rem;
-  font-weight: 600;
+  font-weight: 650;
   vertical-align: middle;
 }
 
@@ -91,25 +94,36 @@
 
 .browser__item-value {
   font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-weight: 600;
   text-align: right;
 }
 
-.browser__item-value:first-of-type {
-  color: var(--color-text);
+.browser__item-value--calories {
+  color: var(--macro-calories);
+}
+
+.browser__item-value--protein {
+  color: var(--macro-protein);
+}
+
+.browser__item-value--carbs {
+  color: var(--macro-carbs);
 }
 
 .browser__empty {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-3);
+  margin: var(--space-4);
+  padding: var(--space-6) var(--space-4);
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  text-align: center;
 }
 
 .browser__empty-text {
   color: var(--color-text-muted);
-  font-style: italic;
 }
 
 @media (max-width: 480px) {

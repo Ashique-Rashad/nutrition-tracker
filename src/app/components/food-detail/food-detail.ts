@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  untracked,
+} from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FoodItem } from '../../models/food-item.model';
 import { MEAL_TYPES, MealType } from '../../models/meal-type.model';
@@ -27,6 +36,17 @@ export class FoodDetail {
 
   readonly servingsInput = signal('1');
   readonly meal = signal<MealType>('breakfast');
+
+  constructor() {
+    // Reset the add-to-meal form to its defaults whenever a different food is selected.
+    effect(() => {
+      this.food();
+      untracked(() => {
+        this.servingsInput.set('1');
+        this.meal.set('breakfast');
+      });
+    });
+  }
 
   readonly servings = computed<number | null>(() => {
     const raw = this.servingsInput().trim();

@@ -1,26 +1,53 @@
 /* Global styles: CSS variables, base styles, utility classes */
 
-:root {
-  --color-bg: #f4f6f8;
-  --color-surface: #ffffff;
-  --color-surface-alt: #eef1f4;
-  --color-border: #d7dde3;
-  --color-text: #1f2933;
-  --color-text-muted: #5b6771;
-  --color-primary: #2f6f4f;
-  --color-primary-contrast: #ffffff;
-  --color-primary-soft: #e3f0e9;
-  --color-danger: #b3261e;
-  --color-danger-soft: #fdecea;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --shadow-sm: 0 1px 2px rgba(31, 41, 51, 0.08);
-  --shadow-md: 0 2px 8px rgba(31, 41, 51, 0.12);
+/* Design: "kitchen ledger" — sage paper, deep green ink, macro colours
+   (calories = burnt orange, protein = slate blue, carbs = amber) reused
+   everywhere nutrition numbers appear. */
 
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.5rem;
+:root {
+  /* surfaces & text */
+  --color-bg: #f2f5f1;
+  --color-surface: #ffffff;
+  --color-surface-alt: #eef2ed;
+  --color-border: #dde4dc;
+  --color-border-strong: #c6d0c6;
+  --color-text: #22312b;
+  --color-text-muted: #5a6a61;
+
+  /* brand accent (actions, selection, focus) */
+  --color-primary: #256d54;
+  --color-primary-strong: #1d5843;
+  --color-primary-contrast: #ffffff;
+  --color-primary-soft: #e3efe8;
+
+  /* macro colours: used for text/values, AA on surface */
+  --macro-calories: #9d4a12;
+  --macro-calories-soft: #f9ece3;
+  --macro-protein: #2b679c;
+  --macro-protein-soft: #e7eff6;
+  --macro-carbs: #8a6500;
+  --macro-carbs-soft: #f5efdd;
+
+  /* danger */
+  --color-danger: #b03024;
+  --color-danger-soft: #fbeae8;
+
+  /* radius: hierarchy — 14px cards, 8px controls, pill badges */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+
+  /* shadows: one quiet card shadow, nothing decorative */
+  --shadow-sm: 0 1px 2px rgba(28, 43, 38, 0.05);
+  --shadow-card: 0 1px 2px rgba(28, 43, 38, 0.05), 0 10px 24px -16px rgba(28, 43, 38, 0.18);
+
+  /* type scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-md: 0.9375rem;
+  --font-size-lg: 1.0625rem;
+  --font-size-xl: 1.375rem;
+  --font-size-display: clamp(1.75rem, 1.2rem + 1.6vw, 2.125rem);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -28,6 +55,36 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #141a17;
+    --color-surface: #1c2420;
+    --color-surface-alt: #232d28;
+    --color-border: #2b352f;
+    --color-border-strong: #3a463f;
+    --color-text: #e7ece8;
+    --color-text-muted: #9fb0a7;
+
+    --color-primary: #2e8663;
+    --color-primary-strong: #3d9a75;
+    --color-primary-contrast: #ffffff;
+    --color-primary-soft: #1f3630;
+
+    --macro-calories: #f5a26b;
+    --macro-calories-soft: #33261c;
+    --macro-protein: #85b9e3;
+    --macro-protein-soft: #1d2a36;
+    --macro-carbs: #d9b565;
+    --macro-carbs-soft: #2e2a1c;
+
+    --color-danger: #ff9584;
+    --color-danger-soft: #3a201d;
+
+    --shadow-sm: none;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 24px -16px rgba(0, 0, 0, 0.5);
+  }
 }
 
 *,
@@ -38,6 +95,7 @@
 
 html {
   font-size: 16px;
+  color-scheme: light dark;
 }
 
 body {
@@ -51,7 +109,7 @@ body {
     Arial,
     sans-serif;
   font-size: var(--font-size-md);
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -62,7 +120,7 @@ h2,
 h3 {
   margin: 0;
   line-height: 1.25;
-  font-weight: 600;
+  font-weight: 650;
 }
 
 p {
@@ -98,9 +156,51 @@ a {
   color: var(--color-primary);
 }
 
+/* Numeric data reads best aligned: tabular figures everywhere numbers show */
+.numeric,
+.btn,
+input,
+.summary__value,
+.summary__unit,
+.detail__stat-value,
+.detail__preview-value,
+.meal__value,
+.meal__subtotal-value,
+.browser__item-value,
+.browser__item-serving {
+  font-variant-numeric: tabular-nums;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* Inputs and selects: shared chrome */
+input[type='text'],
+input[type='number'],
+input[type='search'],
+select {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+input:hover,
+select:hover {
+  border-color: var(--color-text-muted);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 /* Utility classes */
@@ -108,7 +208,7 @@ a {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-card);
 }
 
 .btn {
@@ -117,41 +217,51 @@ a {
   justify-content: center;
   gap: var(--space-1);
   padding: var(--space-2) var(--space-4);
-  border: 1px solid transparent;
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
-  font-weight: 600;
-  background-color: var(--color-surface-alt);
-  transition: background-color 0.15s ease;
+  font-weight: 650;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .btn:hover:not(:disabled) {
-  background-color: var(--color-border);
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-border-strong);
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
 .btn--primary {
   background-color: var(--color-primary);
+  border-color: var(--color-primary);
   color: var(--color-primary-contrast);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background-color: #26593f;
+  background-color: var(--color-primary-strong);
+  border-color: var(--color-primary-strong);
 }
 
 .btn--danger {
   background-color: transparent;
-  color: var(--color-danger);
-  border-color: var(--color-danger);
-  padding: calc(var(--space-1)) var(--space-3);
+  border-color: transparent;
+  color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
 }
 
 .btn--danger:hover:not(:disabled) {
   background-color: var(--color-danger-soft);
+  border-color: transparent;
+  color: var(--color-danger);
 }
 
 .visually-hidden {

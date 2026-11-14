@@ -15,11 +15,15 @@
             >
           </div>
           <div class="meal__nutrition">
-            <span class="meal__value"
+            <span class="meal__value meal__value--calories"
               >{{ resolved.nutrition.calories | number: '1.0-0' }} kcal</span
             >
-            <span class="meal__value">{{ resolved.nutrition.protein | number: '1.0-1' }} g</span>
-            <span class="meal__value">{{ resolved.nutrition.carbs | number: '1.0-1' }} g</span>
+            <span class="meal__value meal__value--protein"
+              >{{ resolved.nutrition.protein | number: '1.0-1' }} g</span
+            >
+            <span class="meal__value meal__value--carbs"
+              >{{ resolved.nutrition.carbs | number: '1.0-1' }} g</span
+            >
             <button
               type="button"
               class="btn btn--danger meal__remove"
@@ -34,9 +38,15 @@
     </ul>
     <div class="meal__subtotal">
       <span class="meal__subtotal-label">Subtotal</span>
-      <span class="meal__subtotal-value">{{ mealTotal().calories | number: '1.0-0' }} kcal</span>
-      <span class="meal__subtotal-value">{{ mealTotal().protein | number: '1.0-1' }} g</span>
-      <span class="meal__subtotal-value">{{ mealTotal().carbs | number: '1.0-1' }} g</span>
+      <span class="meal__subtotal-value meal__subtotal-value--calories"
+        >{{ mealTotal().calories | number: '1.0-0' }} kcal</span
+      >
+      <span class="meal__subtotal-value meal__subtotal-value--protein"
+        >{{ mealTotal().protein | number: '1.0-1' }} g</span
+      >
+      <span class="meal__subtotal-value meal__subtotal-value--carbs"
+        >{{ mealTotal().carbs | number: '1.0-1' }} g</span
+      >
     </div>
   }
 </section>

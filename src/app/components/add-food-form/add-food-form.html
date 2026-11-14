@@ -1,7 +1,7 @@
 <section class="add-form surface" aria-label="Add a new food">
   <h2 class="add-form__title">Add a food</h2>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-    <div class="add-form__field">
+  <form class="add-form__grid" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="add-form__field add-form__field--wide">
       <label class="add-form__label" for="add-name">Name</label>
       <input
         #nameInput
@@ -49,7 +49,7 @@
       </select>
     </div>
 
-    <div class="add-form__field">
+    <div class="add-form__field add-form__field--calories">
       <label class="add-form__label" for="add-calories">Calories (kcal)</label>
       <input
         id="add-calories"
@@ -69,7 +69,7 @@
       }
     </div>
 
-    <div class="add-form__field">
+    <div class="add-form__field add-form__field--protein">
       <label class="add-form__label" for="add-protein">Protein (g)</label>
       <input
         id="add-protein"
@@ -89,7 +89,7 @@
       }
     </div>
 
-    <div class="add-form__field">
+    <div class="add-form__field add-form__field--carbs">
       <label class="add-form__label" for="add-carbs">Carbohydrates (g)</label>
       <input
         id="add-carbs"

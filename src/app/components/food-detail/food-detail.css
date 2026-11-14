@@ -6,7 +6,9 @@
 }
 
 .detail__title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   overflow-wrap: anywhere;
 }
 
@@ -18,12 +20,14 @@
 .detail__stats {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
+/* Per-serving values as tinted macro chips */
 .detail__stat {
   display: flex;
   flex-direction: column;
+  gap: 2px;
   min-width: 6em;
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--color-border);
@@ -31,14 +35,42 @@
   background-color: var(--color-surface-alt);
 }
 
+.detail__stat--calories {
+  background-color: var(--macro-calories-soft);
+  border-color: transparent;
+}
+
+.detail__stat--protein {
+  background-color: var(--macro-protein-soft);
+  border-color: transparent;
+}
+
+.detail__stat--carbs {
+  background-color: var(--macro-carbs-soft);
+  border-color: transparent;
+}
+
 .detail__stat-label {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 650;
   color: var(--color-text-muted);
 }
 
 .detail__stat-value {
   font-weight: 700;
   white-space: nowrap;
+}
+
+.detail__stat--calories .detail__stat-value {
+  color: var(--macro-calories);
+}
+
+.detail__stat--protein .detail__stat-value {
+  color: var(--macro-protein);
+}
+
+.detail__stat--carbs .detail__stat-value {
+  color: var(--macro-carbs);
 }
 
 .detail__form {
@@ -55,10 +87,6 @@
 
 .detail__input {
   min-width: 7em;
-  padding: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-surface);
 }
 
 .detail__preview {
@@ -66,17 +94,17 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-3);
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
   border-radius: var(--radius-sm);
-  background-color: var(--color-primary-soft);
+  background-color: var(--color-surface-alt);
 }
 
 .detail__preview-label {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-size: var(--font-size-xs);
+  font-weight: 650;
   color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .detail__preview-value {
@@ -86,9 +114,22 @@
 
 .detail__add {
   align-self: flex-start;
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--font-size-md);
 }
 
 .detail__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 9em;
+  margin: var(--space-2);
+  padding: var(--space-4);
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.detail__placeholder p {
   color: var(--color-text-muted);
-  font-style: italic;
 }
